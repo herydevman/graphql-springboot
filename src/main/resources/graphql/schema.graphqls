@@ -1,0 +1,116 @@
+type User {
+    id: ID
+    name: String
+    lastname: String
+    email: String
+    password: String
+    payementway : String
+    islogged: Boolean
+}
+
+type Command{
+    id: ID
+    reference: String
+    plats: [Plat]
+    restaurant: Restaurant
+    date: String
+    payed: Boolean
+}
+
+type Reservation{
+    id: ID
+    reference: String
+    restaurant: Restaurant
+    dateIn: String
+    dateOut: String
+    payed: Boolean
+}
+
+type Plat{
+    id: ID
+    name: String
+    description: String
+    categorie: String
+    image: String
+}
+
+type Restaurant{
+    id: ID
+    name: String
+    levelstar: Int
+    address: String
+    city: String
+    country: String
+    image: String
+}
+
+type Query {
+    userById(id: ID): User,
+    queryUsers: [User],
+    findOneUser(id: ID): User
+
+    platById(id: ID): Plat
+    queryPlats: [Plat]
+    findOnePlat(name: String): Plat
+    findManyPlats(categorie: String): [Plat]
+
+    restaurantById(id: ID): Restaurant
+    queryRestaurants: [Restaurant]
+    findOneRestaurant(name: String): Restaurant
+    findByCity(city: String): [Restaurant]
+    findByCountry(country: String): [Restaurant]
+    findByLevelstar(levelstar: String): [Restaurant]
+}
+
+type Mutation {
+    #=========== USERS ================
+    createUser(
+        name: String,
+        lastname: String,
+        email: String,
+        password: String,
+        payementway: String,
+        islogged: Boolean
+    ): User
+
+    updateUser(
+        id: ID,
+        name : String,
+        lastname: String,
+        password: String,
+        payementway: String
+    ): String
+
+    deleteUser(
+        id: ID
+    ): String
+
+    #=========== PLATS ================
+
+    createPlat(name: String, description: String, categorie: String, image: String): Plat
+    updatePlat(id: ID, name: String, description: String, categorie: String, image: String): Plat
+    deletePlat(id: ID): String
+
+    #=========== RESTAURANT ================
+
+    createRestaurant(
+        name: String
+        levelstar: Int
+        address: String
+        city: String
+        country: String
+        image: String
+    ): Restaurant
+
+    updateRestaurant(id: ID,
+        name: String
+        levelstar: Int
+        address: String
+        city: String
+        country: String
+        image: String
+    ): String
+
+    deleteRestaurant(id: ID): String
+}
+
