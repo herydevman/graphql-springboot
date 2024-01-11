@@ -1,5 +1,7 @@
-FROM eclipse-temurin:21-jdk-alpine
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM eclipse-temurin:21
+RUN mvn clean package
+
+FROM openjdk:21
+COPY target/postgresql.jar app.jar
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
