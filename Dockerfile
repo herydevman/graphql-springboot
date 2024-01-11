@@ -1,4 +1,4 @@
-FROM maven:4-eclipse-temurin:21
+FROM maven:3-eclipse-temurin:21
 COPY . .
 RUN mvn clean package -DskipTests
 
